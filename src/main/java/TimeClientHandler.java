@@ -3,8 +3,6 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-import java.nio.charset.StandardCharsets;
-
 /**
  * author yg
  * description
@@ -30,10 +28,7 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        ByteBuf byteBuf = (ByteBuf) msg;
-        byte[] req = new byte[byteBuf.readableBytes()];
-        byteBuf.readBytes(req);
-        String body = new String(req, StandardCharsets.UTF_8);
+        String body = (String) msg;
         System.out.println("body:" + body + ",counter:" + ++counter);
     }
 
